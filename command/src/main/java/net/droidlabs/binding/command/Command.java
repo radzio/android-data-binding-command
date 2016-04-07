@@ -1,39 +1,41 @@
 package net.droidlabs.binding.command;
 
-import android.databinding.ObservableBoolean;
+import android.databinding.BaseObservable;
 
-public abstract class Command implements ICommand
+public abstract class Command extends BaseObservable implements ICommand
 {
-    private final ObservableBoolean enabled;
-    private final ObservableBoolean inProgress;
+    private boolean isEnabled;
+    private boolean isRefreshing;
 
     public Command()
     {
-        this.enabled = new ObservableBoolean(true);
-        this.inProgress = new ObservableBoolean(false);
+        this.isEnabled = true;
+        this.isRefreshing = false;
     }
 
     @Override
-    public ObservableBoolean canExecute()
+    public boolean isEnabled()
     {
-        return this.enabled;
+        return this.isEnabled;
     }
 
     @Override
-    public void canExecute(boolean enabled)
+    public void isEnabled(boolean isEnabled)
     {
-        this.enabled.set(enabled);
+        this.isEnabled = isEnabled;
+        notifyPropertyChanged(net.droidlabs.binding.command.BR.enabled);
     }
 
     @Override
-    public void isRefreshing(boolean inProgress)
+    public void isRefreshing(boolean isRefreshing)
     {
-        this.inProgress.set(inProgress);
+        this.isRefreshing = isRefreshing;
+        notifyPropertyChanged(net.droidlabs.binding.command.BR.refreshing);
     }
 
     @Override
-    public ObservableBoolean isRefreshing()
+    public boolean isRefreshing()
     {
-        return this.inProgress;
+        return this.isRefreshing;
     }
 }

@@ -1,16 +1,19 @@
 package net.droidlabs.binding.command;
 
-import android.databinding.ObservableBoolean;
+import android.databinding.Bindable;
+import android.databinding.Observable;
 
-public interface ICommand
+public interface ICommand extends Observable
 {
-    ObservableBoolean canExecute();
+    @Bindable
+    boolean isEnabled();
 
-    void canExecute(boolean enabled);
+    void isEnabled(boolean isEnabled);
 
-    void isRefreshing(boolean inProgress);
+    @Bindable
+    boolean isRefreshing();
 
-    ObservableBoolean isRefreshing();
+    void isRefreshing(boolean isRefreshing);
 
     void execute();
 }

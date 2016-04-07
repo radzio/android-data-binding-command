@@ -33,18 +33,28 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            bind:text="@{viewModel.timer}"
+            android:text="@{viewModel.timer}"
             />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
+            android:text="Start Timer"
             android:id="@+id/button"
             android:layout_below="@+id/editText"
             android:layout_centerHorizontal="true"
             bind:command="@{viewModel.buttonCommand}"
-            android:enabled="@{viewModel.buttonCommand.isRefreshing().get() == false}"
+            android:enabled="@{viewModel.buttonCommand.refreshing == false &amp;&amp; viewModel.buttonCommand.enabled}"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_below="@+id/button"
+            bind:command="@{viewModel.enableButtonCommand}"
+            android:text="@{viewModel.buttonCommand.enabled ? `Disable Timer` : `Enable Timer`}"
+            android:enabled="@{viewModel.buttonCommand.refreshing == false}"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </layout>

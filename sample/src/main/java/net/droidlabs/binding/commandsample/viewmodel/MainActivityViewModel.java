@@ -23,6 +23,15 @@ public class MainActivityViewModel
         }
     };
 
+    public ICommand enableButtonCommand = new Command()
+    {
+        @Override
+        public void execute()
+        {
+            buttonCommand.isEnabled(!buttonCommand.isEnabled());
+        }
+    };
+
     public ICommand buttonCommand = new Command()
     {
         @Override
@@ -55,8 +64,8 @@ public class MainActivityViewModel
     public MainActivityViewModel(IMainView view)
     {
         this.view = view;
+        this.buttonCommand.isEnabled(false);
     }
-
 
     private Observable<Integer> longOperation()
     {
