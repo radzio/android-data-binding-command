@@ -9,8 +9,8 @@ public abstract class Command extends BaseObservable implements ICommand
 
     public Command()
     {
-        this.isEnabled = true;
-        this.isRefreshing = false;
+        isEnabled(true);
+        isRefreshing(false);
     }
 
     @Override
