@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">android-data-binding-command</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
