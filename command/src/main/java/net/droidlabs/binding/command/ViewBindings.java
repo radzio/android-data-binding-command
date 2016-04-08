@@ -8,13 +8,13 @@ public class ViewBindings
     @BindingAdapter({"command"})
     public static void bindViewCommand(View view, final ICommand command)
     {
-        view.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            view.setOnClickListener(new View.OnClickListener()
             {
-                command.execute();
-            }
-        });
+                @Override
+                public void onClick(View v)
+                {
+                    command.execute();
+                }
+            });
     }
 }
