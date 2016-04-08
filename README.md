@@ -1,6 +1,6 @@
-# Android Databinding Command
+# Android Data Binding Command
 
-Command design pattern implementation for Android Databinding
+Command design pattern implementation for Android Data Binding
 
 [![](https://jitpack.io/v/radzio/android-data-binding-command.svg)](https://jitpack.io/#radzio/android-data-binding-command)
 
@@ -31,15 +31,15 @@ Step 2. Add the dependency
 
 Share this release:
 
-### Change your gradle file
+### Make sure that you are using Android Data Binding
 
-- In your main  build.gradle add:
+- In your main  build.gradle you have gradle plugin 1.5.0 or newer:
  
 ```gradle
 classpath 'com.android.tools.build:gradle:1.5.0'
 ```
 
-- In your app build.gradle add:
+- In your app build.gradle you've enabled databinding:
     
     
 ```gradle
@@ -75,3 +75,38 @@ Add in your binding class
         }
     };
 ```    
+
+### Command features ###
+
+Each command implements ICommand interface
+
+```java
+    public interface ICommand extends Observable
+    {
+        @Bindable
+        boolean isEnabled();
+    
+        void isEnabled(boolean isEnabled);
+    
+        @Bindable
+        boolean isRefreshing();
+    
+        void isRefreshing(boolean isRefreshing);
+    
+        void execute();
+    }
+```
+
+You can use isEnabled and isRefreshing properties in your [java code](https://jitpack.io/#radzio/android-data-binding-command) and xml layouts:
+
+```xml
+     <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_below="@+id/button"
+            bind:command="@{viewModel.enableButtonCommand}"
+            android:text="@{viewModel.buttonCommand.enabled ? `Disable Timer` : `Enable Timer`}"
+            android:enabled="@{viewModel.buttonCommand.refreshing == false}"
+            android:layout_centerHorizontal="true"/>
+```
