@@ -6,19 +6,15 @@ import android.view.View;
 public class ViewBindings
 {
     @BindingAdapter({"command"})
-    public static void bindEditText(View view, final ICommand command)
+    public static void bindViewCommand(View view, final ICommand command)
     {
-        if (view.getTag(R.id.commandBinded) == null)
+        view.setOnClickListener(new View.OnClickListener()
         {
-            view.setTag(R.id.commandBinded, true);
-            view.setOnClickListener(new View.OnClickListener()
+            @Override
+            public void onClick(View v)
             {
-                @Override
-                public void onClick(View v)
-                {
-                    command.execute();
-                }
-            });
-        }
+                command.execute();
+            }
+        });
     }
 }
